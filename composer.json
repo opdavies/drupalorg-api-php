@@ -1,8 +1,12 @@
 {
+    "name": "opdavies/drupalorg-api-php",
+    "description": "PHP library for the Drupal.org API",
     "require": {
-        "tightenco/collect": "^5.4",
-        "symfony/var-dumper": "^3.4",
-        "guzzlehttp/guzzle": "^6.3"
+        "guzzlehttp/guzzle": "^6.3",
+        "tightenco/collect": "^5.4"
+    },
+    "require-dev": {
+        "symfony/var-dumper": "^3.4"
     },
     "autoload": {
         "psr-4": {
