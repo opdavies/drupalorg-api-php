@@ -88,8 +88,8 @@ abstract class AbstractQuery implements QueryInterface
     /**
      * Execute the query.
      *
-     * @return $this
      * @throws Exception
+     * @return $this
      */
     public function execute()
     {

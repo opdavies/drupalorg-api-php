@@ -7,8 +7,9 @@
         "tightenco/collect": "^5.4"
     },
     "require-dev": {
-        "symfony/var-dumper": "^3.4",
-        "phpunit/phpunit": "^5.7"
+        "friendsofphp/php-cs-fixer": "^2.10",
+        "phpunit/phpunit": "^5.7",
+        "symfony/var-dumper": "^3.4"
     },
     "autoload": {
         "psr-4": {
