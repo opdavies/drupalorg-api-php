@@ -75,10 +75,14 @@ abstract class AbstractQuery implements QueryInterface
 
     /**
      * @param array $options
+     *
+     * @return $this
      */
     public function setOptions(array $options)
     {
         $this->options = $options;
+
+        return $this;
     }
 
     /**

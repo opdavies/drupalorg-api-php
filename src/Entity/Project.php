@@ -21,7 +21,6 @@ class Project extends Node
      */
     public function getStars()
     {
-        return collect($this->get('flag_project_star_user'))
-            ->count();
+        return collect($this->get('flag_project_star_user'))->count();
     }
 }

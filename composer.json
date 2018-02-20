@@ -6,11 +6,17 @@
         "tightenco/collect": "^5.4"
     },
     "require-dev": {
-        "symfony/var-dumper": "^3.4"
+        "symfony/var-dumper": "^3.4",
+        "phpunit/phpunit": "^5.7"
     },
     "autoload": {
         "psr-4": {
             "Opdavies\\Drupalorg\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Opdavies\\Drupalorg\\Tests\\": "tests/src/"
         }
     }
 }
