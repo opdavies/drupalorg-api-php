@@ -42,7 +42,8 @@ class NodeTest extends TestCase
     /**
      * @return array
      */
-    private function getNodes() {
+    private function getNodes()
+    {
         $nodes = [];
 
         $nodeA = new stdClass();
