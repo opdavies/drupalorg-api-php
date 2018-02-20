@@ -4,7 +4,6 @@ namespace Opdavies\Drupalorg\Tests;
 
 use Opdavies\Drupalorg\Entity\Project;
 use Opdavies\Drupalorg\Tests\Query\NodeQuery;
-use Opdavies\Drupalorg\Tests\Query\ProjectQuery;
 use PHPUnit\Framework\TestCase;
 use stdClass;
 
@@ -14,6 +13,26 @@ class ProjectTest extends TestCase
      * @var Project[]
      */
     private $nodes;
+
+    /**
+     * Test that the correct download count is returned.
+     */
+    public function testGetDownloadCount()
+    {
+        $this->assertSame(1234, $this->nodes[0]->getDownloads());
+        $this->assertSame(0, $this->nodes[1]->getDownloads());
+        $this->assertSame(99, $this->nodes[2]->getDownloads());
+    }
+
+    /**
+     * Test that the correct star count is returned.
+     */
+    public function testGetStarCount()
+    {
+        $this->assertSame(1, $this->nodes[0]->getStars());
+        $this->assertSame(0, $this->nodes[1]->getStars());
+        $this->assertSame(5, $this->nodes[2]->getStars());
+    }
 
     /**
      * {@inheritdoc}
@@ -28,20 +47,6 @@ class ProjectTest extends TestCase
         $this->nodes = collect($items)->map(function (stdClass $item) {
             return Project::create($item);
         })->all();
-    }
-
-    public function testGetDownloadCount()
-    {
-        $this->assertSame(1234, $this->nodes[0]->getDownloads());
-        $this->assertSame(0, $this->nodes[1]->getDownloads());
-        $this->assertSame(99, $this->nodes[2]->getDownloads());
-    }
-
-    public function testGetStarCount()
-    {
-        $this->assertSame(1, $this->nodes[0]->getStars());
-        $this->assertSame(0, $this->nodes[1]->getStars());
-        $this->assertSame(5, $this->nodes[2]->getStars());
     }
 
     /**

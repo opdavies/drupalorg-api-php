@@ -15,6 +15,22 @@ class NodeTest extends TestCase
     private $nodes;
 
     /**
+     * Test that the correct node ID is returned.
+     */
+    public function testGetNid()
+    {
+        $this->assertEquals(5, $this->nodes[0]->get('nid'));
+    }
+
+    /**
+     * Test that the correct node title is returned.
+     */
+    public function testGetTitle()
+    {
+        $this->assertEquals('Foo', $this->nodes[0]->getTitle());
+    }
+
+    /**
      * {@inheritdoc}
      */
     protected function setUp()
@@ -27,16 +43,6 @@ class NodeTest extends TestCase
         $this->nodes = collect($items)->map(function (stdClass $item) {
             return Node::create($item);
         });
-    }
-
-    public function testGetNid()
-    {
-        $this->assertEquals(5, $this->nodes[0]->get('nid'));
-    }
-
-    public function testGetTitle()
-    {
-        $this->assertEquals('Foo', $this->nodes[0]->getTitle());
     }
 
     /**

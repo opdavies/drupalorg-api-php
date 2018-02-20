@@ -25,6 +25,13 @@ class NodeQuery extends \Opdavies\Drupalorg\Query\NodeQuery
         return $this;
     }
 
+    /**
+     * Allow for setting test nodes to return from the query.
+     *
+     * @param array $nodes
+     *
+     * @return $this
+     */
     public function setNodes(array $nodes)
     {
         $this->nodes = $nodes;
