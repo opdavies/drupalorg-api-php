@@ -130,6 +130,6 @@ abstract class AbstractQuery implements QueryInterface
      */
     public function getContents()
     {
-        return $this->contents;
+        return collect($this->contents);
     }
 }

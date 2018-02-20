@@ -39,14 +39,13 @@ class ProjectTest extends TestCase
      */
     protected function setUp()
     {
-        $items = (new NodeQuery())
-          ->setNodes($this->getNodes())
-          ->execute()
-          ->getContents();
-
-        $this->nodes = collect($items)->map(function (stdClass $item) {
-            return Project::create($item);
-        })->all();
+        $this->nodes = (new NodeQuery())
+            ->setNodes($this->getNodes())
+            ->execute()
+            ->getContents()
+            ->map(function (stdClass $item) {
+                return Project::create($item);
+            });
     }
 
     /**
