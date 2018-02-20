@@ -15,11 +15,6 @@ class Project extends Node
     const FIELD_STARS = 'flag_project_star_user';
 
     /**
-     * The module project type.
-     */
-    const TYPE_MODULE = 'project_module';
-
-    /**
      * Retrieve the number of downloads.
      *
      * @return int

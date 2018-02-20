@@ -8,6 +8,21 @@ use stdClass;
 class Node
 {
     /**
+     * The distribution project type.
+     */
+    const TYPE_DISTRIBUTION = 'project_distribution';
+
+    /**
+     * The module project type.
+     */
+    const TYPE_MODULE = 'project_module';
+
+    /**
+     * The theme project type.
+     */
+    const TYPE_THEME = 'project_theme';
+
+    /**
      * The node data.
      *
      * @var Collection
