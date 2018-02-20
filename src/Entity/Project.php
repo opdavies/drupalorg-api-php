@@ -5,13 +5,28 @@ namespace Opdavies\Drupalorg\Entity;
 class Project extends Node
 {
     /**
+     * The field to use for the number of downloads.
+     */
+    const FIELD_DOWNLOADS = 'field_download_count';
+
+    /**
+     * The field to use for the number of stars.
+     */
+    const FIELD_STARS = 'flag_project_star_user';
+
+    /**
+     * The module project type.
+     */
+    const TYPE_MODULE = 'project_module';
+
+    /**
      * Retrieve the number of downloads.
      *
      * @return int
      */
     public function getDownloads()
     {
-        return (int) $this->get('field_download_count');
+        return (int) $this->get(self::FIELD_DOWNLOADS);
     }
 
     /**
@@ -21,6 +36,7 @@ class Project extends Node
      */
     public function getStars()
     {
-        return collect($this->get('flag_project_star_user'))->count();
+        return collect($this->get(self::FIELD_STARS))
+            ->count();
     }
 }

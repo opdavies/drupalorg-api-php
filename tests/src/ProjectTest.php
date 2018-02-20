@@ -52,24 +52,24 @@ class ProjectTest extends TestCase
         $nodes = [];
 
         $projectA = new stdClass();
-        $projectA->field_download_count = 1234;
-        $projectA->flag_project_star_user = [1];
         $projectA->nid = 1;
         $projectA->title = 'Project A';
+        $projectA->{Project::FIELD_DOWNLOADS} = 1234;
+        $projectA->{Project::FIELD_STARS} = [1];
         $nodes[] = $projectA;
 
         $projectB = new stdClass();
-        $projectB->field_download_count = 0;
-        $projectB->flag_project_star_user = [];
         $projectB->nid = 2;
         $projectB->title = 'Project B';
+        $projectB->{Project::FIELD_DOWNLOADS} = 0;
+        $projectB->{Project::FIELD_STARS} = [];
         $nodes[] = $projectB;
 
         $projectC = new stdClass();
-        $projectC->field_download_count = 99;
-        $projectC->flag_project_star_user = [1, 2, 3, 4, 5];
         $projectC->nid = 3;
         $projectC->title = 'Project C';
+        $projectC->{Project::FIELD_DOWNLOADS} = 99;
+        $projectC->{Project::FIELD_STARS} = [1, 2, 3, 4, 5];
         $nodes[] = $projectC;
 
         return $nodes;
