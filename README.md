@@ -6,11 +6,19 @@ This library provides convenient wrapper functions for Drupal.org’s REST API. 
 
 ## Examples
 
+### Nodes
+
+```php
+$nids = [107871, 2945793, 1306976];
+$query = new NodeQuery();
+$query->setOptions(['query' => ['type' => Node::TYPE_MODULE, 'nid' => $nids]]);
+$nodes = $query->execute()->getContents()->all();
+```
 ### Users
 
-```
+```php
 $uids = [1, 381388];
-$query = new UserQuery;
+$query = new UserQuery();
 $query->setOptions(['query' => ['uid' => $uids]]);
-$users = $query->execute->getContents()->all();
+$users = $query->execute()->getContents()->all();
 ```
