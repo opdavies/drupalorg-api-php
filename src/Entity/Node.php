@@ -20,11 +20,11 @@ class Node extends Entity
     const TYPE_THEME = 'project_theme';
 
 
-  /**
-     * Retrieve the project title.
-     *
-     * @return string
-     */
+    /**
+       * Retrieve the project title.
+       *
+       * @return string
+       */
     public function getTitle()
     {
         return $this->get('title');

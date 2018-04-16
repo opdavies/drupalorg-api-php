@@ -13,9 +13,9 @@ class UserTest extends TestCase
      */
     private $users;
 
-  /**
-   * {@inheritdoc}
-   */
+    /**
+     * {@inheritdoc}
+     */
     protected function setUp()
     {
         $this->users = (new FakeUserQuery())
@@ -27,9 +27,10 @@ class UserTest extends TestCase
             });
     }
 
-    public function testGetUsername() {
-      $this->assertEquals('Dries', $this->users[0]->getUsername());
-      $this->assertEquals('opdavies', $this->users[1]->getUsername());
+    public function testGetUsername()
+    {
+        $this->assertEquals('Dries', $this->users[0]->getUsername());
+        $this->assertEquals('opdavies', $this->users[1]->getUsername());
     }
 
     /**
