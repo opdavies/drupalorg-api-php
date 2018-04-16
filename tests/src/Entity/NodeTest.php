@@ -1,11 +1,10 @@
 <?php
 
-namespace Opdavies\Drupalorg\Tests;
+namespace Opdavies\Drupalorg\Tests\Entity;
 
 use Opdavies\Drupalorg\Entity\Node;
 use Opdavies\Drupalorg\Tests\Query\FakeNodeQuery;
 use PHPUnit\Framework\TestCase;
-use stdClass;
 
 class NodeTest extends TestCase
 {
@@ -39,7 +38,7 @@ class NodeTest extends TestCase
             ->setNodes($this->getNodes())
             ->execute()
             ->getContents()
-            ->map(function (stdClass $item) {
+            ->map(function (\stdClass $item) {
                 return Node::create($item);
             });
     }
@@ -51,12 +50,12 @@ class NodeTest extends TestCase
     {
         $nodes = [];
 
-        $nodeA = new stdClass();
+        $nodeA = new \stdClass();
         $nodeA->title = 'Foo';
         $nodeA->nid = 5;
         $nodes[] = $nodeA;
 
-        $nodeB = new stdClass();
+        $nodeB = new \stdClass();
         $nodeB->title = 'Bar';
         $nodeB->nid = 10;
         $nodes[] = $nodeB;

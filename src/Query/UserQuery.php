@@ -2,7 +2,7 @@
 
 namespace Opdavies\Drupalorg\Query;
 
-class UserQuery extends AbstractQuery
+class UserQuery extends Query
 {
     /**
      * {@inheritdoc}

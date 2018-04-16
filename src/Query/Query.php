@@ -8,7 +8,7 @@ use GuzzleHttp\ClientInterface;
 use Illuminate\Support\Collection;
 use Psr\Http\Message\ResponseInterface;
 
-abstract class AbstractQuery implements QueryInterface
+abstract class Query implements QueryInterface
 {
     /**
      * The client.

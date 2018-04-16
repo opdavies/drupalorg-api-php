@@ -1,11 +1,10 @@
 <?php
 
-namespace Opdavies\Drupalorg\Tests;
+namespace Opdavies\Drupalorg\Tests\Entity;
 
 use Opdavies\Drupalorg\Entity\Project;
 use Opdavies\Drupalorg\Tests\Query\FakeNodeQuery;
 use PHPUnit\Framework\TestCase;
-use stdClass;
 
 class ProjectTest extends TestCase
 {
@@ -43,7 +42,7 @@ class ProjectTest extends TestCase
             ->setNodes($this->getNodes())
             ->execute()
             ->getContents()
-            ->map(function (stdClass $item) {
+            ->map(function (\stdClass $item) {
                 return Project::create($item);
             });
     }
@@ -55,21 +54,21 @@ class ProjectTest extends TestCase
     {
         $nodes = [];
 
-        $projectA = new stdClass();
+        $projectA = new \stdClass();
         $projectA->nid = 1;
         $projectA->title = 'Project A';
         $projectA->{Project::FIELD_DOWNLOADS} = 1234;
         $projectA->{Project::FIELD_STARS} = [1];
         $nodes[] = $projectA;
 
-        $projectB = new stdClass();
+        $projectB = new \stdClass();
         $projectB->nid = 2;
         $projectB->title = 'Project B';
         $projectB->{Project::FIELD_DOWNLOADS} = 0;
         $projectB->{Project::FIELD_STARS} = [];
         $nodes[] = $projectB;
 
-        $projectC = new stdClass();
+        $projectC = new \stdClass();
         $projectC->nid = 3;
         $projectC->title = 'Project C';
         $projectC->{Project::FIELD_DOWNLOADS} = 99;
