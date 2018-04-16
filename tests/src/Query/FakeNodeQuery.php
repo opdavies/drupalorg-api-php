@@ -4,9 +4,9 @@ namespace Opdavies\Drupalorg\Tests\Query;
 
 use GuzzleHttp\Psr7\Response;
 use Opdavies\Drupalorg\Entity\Node;
-use stdClass;
+use Opdavies\Drupalorg\Query\NodeQuery;
 
-class NodeQuery extends \Opdavies\Drupalorg\Query\NodeQuery
+class FakeNodeQuery extends NodeQuery
 {
     /**
      * @var Node[]

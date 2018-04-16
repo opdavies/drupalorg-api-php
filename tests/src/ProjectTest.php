@@ -3,7 +3,7 @@
 namespace Opdavies\Drupalorg\Tests;
 
 use Opdavies\Drupalorg\Entity\Project;
-use Opdavies\Drupalorg\Tests\Query\NodeQuery;
+use Opdavies\Drupalorg\Tests\Query\FakeNodeQuery;
 use PHPUnit\Framework\TestCase;
 use stdClass;
 
@@ -39,7 +39,7 @@ class ProjectTest extends TestCase
      */
     protected function setUp()
     {
-        $this->nodes = (new NodeQuery())
+        $this->nodes = (new FakeNodeQuery())
             ->setNodes($this->getNodes())
             ->execute()
             ->getContents()
