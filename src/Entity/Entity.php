@@ -36,13 +36,13 @@ abstract class Entity
     }
 
     /**
- * Get a property of the node data.
+     * Get a property of the node data.
      *
      * @param  string  $key The property to get.
      * @param  null    $default A default value.
      *
      * @return mixed
- */
+     */
     public function get($key, $default = null)
     {
         return $this->data->get($key, $default);
