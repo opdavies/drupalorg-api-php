@@ -3,6 +3,7 @@
     "description": "PHP library for the Drupal.org API",
     "require": {
         "php": "^7.1",
+        "ext-json": "^1.5",
         "guzzlehttp/guzzle": "^6.3",
         "tightenco/collect": "^5.4"
     },
