@@ -2,7 +2,7 @@
     "name": "opdavies/drupalorg-api-php",
     "description": "PHP library for the Drupal.org API",
     "require": {
-        "php": "^5.6|^7",
+        "php": "^7.1",
         "guzzlehttp/guzzle": "^6.3",
         "tightenco/collect": "^5.4"
     },
