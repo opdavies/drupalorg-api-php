@@ -19,7 +19,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Opdavies\\Drupalorg\\Tests\\": "tests/src/"
+            "Opdavies\\Drupalorg\\Tests\\": "tests/"
         }
     },
     "config": {
