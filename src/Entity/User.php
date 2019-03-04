@@ -11,6 +11,6 @@ class User extends Entity
      */
     public function getUsername()
     {
-        return $this->data['username'];
+        return $this->data['name'];
     }
 }
