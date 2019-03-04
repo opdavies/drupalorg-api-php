@@ -17,24 +17,6 @@ class NodeTest extends TestCase
     private $nodes;
 
     /**
-     * Test that the correct node ID is returned.
-     */
-    public function testGetNid()
-    {
-        $this->assertEquals(107871, $this->nodes[0]->get('nid'));
-        $this->assertEquals(3012622, $this->nodes[1]->get('nid'));
-    }
-
-    /**
-     * Test that the correct node title is returned.
-     */
-    public function testGetTitle()
-    {
-        $this->assertEquals('Override Node Options', $this->nodes[0]->getTitle());
-        $this->assertEquals('Simple Smartling', $this->nodes[1]->getTitle());
-    }
-
-    /**
      * {@inheritdoc}
      */
     protected function setUp()
@@ -57,5 +39,19 @@ class NodeTest extends TestCase
             ->map(function (\stdClass $item) {
                 return Node::create($item);
             });
+    }
+
+    /** @test */
+    public function get_node_id()
+    {
+        $this->assertEquals(107871, $this->nodes[0]->get('nid'));
+        $this->assertEquals(3012622, $this->nodes[1]->get('nid'));
+    }
+
+    /** @test */
+    public function get_title()
+    {
+        $this->assertEquals('Override Node Options', $this->nodes[0]->getTitle());
+        $this->assertEquals('Simple Smartling', $this->nodes[1]->getTitle());
     }
 }

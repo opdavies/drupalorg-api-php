@@ -43,7 +43,8 @@ class UserTest extends TestCase
             });
     }
 
-    public function testGetUsername()
+    /** @test */
+    public function get_username()
     {
         $this->assertEquals('Dries', $this->users[0]->getUsername());
         $this->assertEquals('opdavies', $this->users[1]->getUsername());

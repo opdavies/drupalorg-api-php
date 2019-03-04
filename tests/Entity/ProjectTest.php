@@ -17,26 +17,6 @@ class ProjectTest extends TestCase
     private $projects;
 
     /**
-     * Test that the correct download count is returned.
-     */
-    public function testGetDownloadCount()
-    {
-        $this->assertSame(1234, $this->projects[0]->getDownloads());
-        $this->assertSame(0, $this->projects[1]->getDownloads());
-        $this->assertSame(99, $this->projects[2]->getDownloads());
-    }
-
-    /**
-     * Test that the correct star count is returned.
-     */
-    public function testGetStarCount()
-    {
-        $this->assertSame(1, $this->projects[0]->getStars());
-        $this->assertSame(0, $this->projects[1]->getStars());
-        $this->assertSame(5, $this->projects[2]->getStars());
-    }
-
-    /**
      * {@inheritdoc}
      */
     protected function setUp()
@@ -60,5 +40,21 @@ class ProjectTest extends TestCase
             ->map(function (\stdClass $item) {
                 return Project::create($item);
             });
+    }
+
+    /** @test */
+    public function get_download_count()
+    {
+        $this->assertSame(1234, $this->projects[0]->getDownloads());
+        $this->assertSame(0, $this->projects[1]->getDownloads());
+        $this->assertSame(99, $this->projects[2]->getDownloads());
+    }
+
+    /** @test */
+    public function get_star_count()
+    {
+        $this->assertSame(1, $this->projects[0]->getStars());
+        $this->assertSame(0, $this->projects[1]->getStars());
+        $this->assertSame(5, $this->projects[2]->getStars());
     }
 }
