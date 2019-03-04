@@ -45,12 +45,9 @@ abstract class Query implements QueryInterface
      */
     private $options = [];
 
-    /**
-     * AbstractQuery constructor.
-     */
-    public function __construct()
+    public function __construct(ClientInterface $client = null)
     {
-        $this->query = new Client([
+        $this->query = $client ?? new Client([
           'base_uri' => 'https://www.drupal.org/api-d7/',
         ]);
 
