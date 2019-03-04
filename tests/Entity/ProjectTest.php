@@ -2,25 +2,28 @@
 
 namespace Opdavies\Drupalorg\Tests\Entity;
 
+use GuzzleHttp\Client;
+use GuzzleHttp\Handler\MockHandler;
+use GuzzleHttp\HandlerStack;
+use GuzzleHttp\Psr7\Response;
+use Illuminate\Support\Collection;
 use Opdavies\Drupalorg\Entity\Project;
-use Opdavies\Drupalorg\Tests\Query\FakeNodeQuery;
+use Opdavies\Drupalorg\Query\NodeQuery;
 use PHPUnit\Framework\TestCase;
 
 class ProjectTest extends TestCase
 {
-    /**
-     * @var Project[]
-     */
-    private $nodes;
+    /** @var Collection */
+    private $projects;
 
     /**
      * Test that the correct download count is returned.
      */
     public function testGetDownloadCount()
     {
-        $this->assertSame(1234, $this->nodes[0]->getDownloads());
-        $this->assertSame(0, $this->nodes[1]->getDownloads());
-        $this->assertSame(99, $this->nodes[2]->getDownloads());
+        $this->assertSame(1234, $this->projects[0]->getDownloads());
+        $this->assertSame(0, $this->projects[1]->getDownloads());
+        $this->assertSame(99, $this->projects[2]->getDownloads());
     }
 
     /**
@@ -28,9 +31,9 @@ class ProjectTest extends TestCase
      */
     public function testGetStarCount()
     {
-        $this->assertSame(1, $this->nodes[0]->getStars());
-        $this->assertSame(0, $this->nodes[1]->getStars());
-        $this->assertSame(5, $this->nodes[2]->getStars());
+        $this->assertSame(1, $this->projects[0]->getStars());
+        $this->assertSame(0, $this->projects[1]->getStars());
+        $this->assertSame(5, $this->projects[2]->getStars());
     }
 
     /**
@@ -38,43 +41,24 @@ class ProjectTest extends TestCase
      */
     protected function setUp()
     {
-        $this->nodes = (new FakeNodeQuery())
-            ->setNodes($this->getNodes())
+        $mock = new MockHandler([
+            new Response(200, [], json_encode([
+                'list' => [
+                    [Project::FIELD_DOWNLOADS => 1234, Project::FIELD_STARS => [1]],
+                    [Project::FIELD_DOWNLOADS => 0, Project::FIELD_STARS => []],
+                    [Project::FIELD_DOWNLOADS => 99, Project::FIELD_STARS => [1, 2, 3, 4, 5]],
+                ],
+            ])),
+        ]);
+
+        $handler = HandlerStack::create($mock);
+        $client = new Client(['handler' => $handler]);
+
+        $this->projects = (new NodeQuery($client))
             ->execute()
             ->getContents()
             ->map(function (\stdClass $item) {
                 return Project::create($item);
             });
-    }
-
-    /**
-     * @return array
-     */
-    private function getNodes()
-    {
-        $nodes = [];
-
-        $projectA = new \stdClass();
-        $projectA->nid = 1;
-        $projectA->title = 'Project A';
-        $projectA->{Project::FIELD_DOWNLOADS} = 1234;
-        $projectA->{Project::FIELD_STARS} = [1];
-        $nodes[] = $projectA;
-
-        $projectB = new \stdClass();
-        $projectB->nid = 2;
-        $projectB->title = 'Project B';
-        $projectB->{Project::FIELD_DOWNLOADS} = 0;
-        $projectB->{Project::FIELD_STARS} = [];
-        $nodes[] = $projectB;
-
-        $projectC = new \stdClass();
-        $projectC->nid = 3;
-        $projectC->title = 'Project C';
-        $projectC->{Project::FIELD_DOWNLOADS} = 99;
-        $projectC->{Project::FIELD_STARS} = [1, 2, 3, 4, 5];
-        $nodes[] = $projectC;
-
-        return $nodes;
     }
 }

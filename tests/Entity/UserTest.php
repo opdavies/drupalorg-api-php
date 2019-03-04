@@ -2,14 +2,19 @@
 
 namespace Opdavies\Drupalorg\Tests\Entity;
 
+use GuzzleHttp\Client;
+use GuzzleHttp\Handler\MockHandler;
+use GuzzleHttp\HandlerStack;
+use GuzzleHttp\Psr7\Response;
+use Illuminate\Support\Collection;
 use Opdavies\Drupalorg\Entity\User;
-use Opdavies\Drupalorg\Tests\Query\FakeUserQuery;
+use Opdavies\Drupalorg\Query\UserQuery;
 use PHPUnit\Framework\TestCase;
 
 class UserTest extends TestCase
 {
     /**
-     * @var User[]
+     * @var Collection
      */
     private $users;
 
@@ -18,12 +23,23 @@ class UserTest extends TestCase
      */
     protected function setUp()
     {
-        $this->users = (new FakeUserQuery())
-            ->setUsers($this->getUsers())
+        $mock = new MockHandler([
+            new Response(200, [], json_encode([
+                'list' => [
+                    ['uid' => 1, 'name' => 'Dries'],
+                    ['uid' => 381388, 'name' => 'opdavies'],
+                ],
+            ])),
+        ]);
+
+        $handler = HandlerStack::create($mock);
+        $client = new Client(['handler' => $handler]);
+
+        $this->users = (new UserQuery($client))
             ->execute()
             ->getContents()
-            ->map(function (\stdClass $item) {
-                return User::create($item);
+            ->map(function (\stdClass $user) {
+                return User::create($user);
             });
     }
 
@@ -31,25 +47,5 @@ class UserTest extends TestCase
     {
         $this->assertEquals('Dries', $this->users[0]->getUsername());
         $this->assertEquals('opdavies', $this->users[1]->getUsername());
-    }
-
-    /**
-     * @return array
-     */
-    private function getUsers()
-    {
-        $users = [];
-
-        $user1 = new \stdClass();
-        $user1->uid = 1;
-        $user1->username = 'Dries';
-        $users[] = $user1;
-
-        $user2 = new \stdClass();
-        $user2->uid = 381388;
-        $user2->username = 'opdavies';
-        $users[] = $user2;
-
-        return $users;
     }
 }

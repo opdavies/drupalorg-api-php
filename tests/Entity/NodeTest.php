@@ -2,15 +2,18 @@
 
 namespace Opdavies\Drupalorg\Tests\Entity;
 
+use GuzzleHttp\Client;
+use GuzzleHttp\Handler\MockHandler;
+use GuzzleHttp\HandlerStack;
+use GuzzleHttp\Psr7\Response;
+use Illuminate\Support\Collection;
 use Opdavies\Drupalorg\Entity\Node;
-use Opdavies\Drupalorg\Tests\Query\FakeNodeQuery;
+use Opdavies\Drupalorg\Query\NodeQuery;
 use PHPUnit\Framework\TestCase;
 
 class NodeTest extends TestCase
 {
-    /**
-     * @var Node[]
-     */
+    /** @var \Illuminate\Support\Collection */
     private $nodes;
 
     /**
@@ -18,7 +21,8 @@ class NodeTest extends TestCase
      */
     public function testGetNid()
     {
-        $this->assertEquals(5, $this->nodes[0]->get('nid'));
+        $this->assertEquals(107871, $this->nodes[0]->get('nid'));
+        $this->assertEquals(3012622, $this->nodes[1]->get('nid'));
     }
 
     /**
@@ -26,7 +30,8 @@ class NodeTest extends TestCase
      */
     public function testGetTitle()
     {
-        $this->assertEquals('Foo', $this->nodes[0]->getTitle());
+        $this->assertEquals('Override Node Options', $this->nodes[0]->getTitle());
+        $this->assertEquals('Simple Smartling', $this->nodes[1]->getTitle());
     }
 
     /**
@@ -34,32 +39,23 @@ class NodeTest extends TestCase
      */
     protected function setUp()
     {
-        $this->nodes = (new FakeNodeQuery())
-            ->setNodes($this->getNodes())
+        $mock = new MockHandler([
+            new Response(200, [], json_encode([
+                'list' => [
+                    ['nid' => 107871, 'title' => 'Override Node Options'],
+                    ['nid' => 3012622, 'title' => 'Simple Smartling'],
+                ],
+            ])),
+        ]);
+
+        $handler = HandlerStack::create($mock);
+        $client = new Client(['handler' => $handler]);
+
+        $this->nodes = (new NodeQuery($client))
             ->execute()
             ->getContents()
             ->map(function (\stdClass $item) {
                 return Node::create($item);
             });
-    }
-
-    /**
-     * @return array
-     */
-    private function getNodes()
-    {
-        $nodes = [];
-
-        $nodeA = new \stdClass();
-        $nodeA->title = 'Foo';
-        $nodeA->nid = 5;
-        $nodes[] = $nodeA;
-
-        $nodeB = new \stdClass();
-        $nodeB->title = 'Bar';
-        $nodeB->nid = 10;
-        $nodes[] = $nodeB;
-
-        return $nodes;
     }
 }

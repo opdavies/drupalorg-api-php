@@ -28,7 +28,7 @@ abstract class Entity
      * Convert an item into a Node entity.
      *
      * @param  stdClass $item The original data.
-     * @return Entity
+     * @return static
      */
     public static function create(stdClass $item)
     {
