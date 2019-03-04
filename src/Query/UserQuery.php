@@ -7,7 +7,7 @@ class UserQuery extends Query
     /**
      * {@inheritdoc}
      */
-    public function setUri()
+    public function setUri(): string
     {
         return 'user.json';
     }

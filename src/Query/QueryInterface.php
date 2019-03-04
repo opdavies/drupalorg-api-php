@@ -9,12 +9,13 @@ interface QueryInterface
      *
      * @return string
      */
-    public function setUri();
+    public function setUri(): string;
 
     /**
      * Set any additional options for the query.
      *
      * @param array $options
+     * @return self
      */
-    public function setOptions(array $options);
+    public function setOptions(array $options): self;
 }

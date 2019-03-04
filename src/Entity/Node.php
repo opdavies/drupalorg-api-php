@@ -24,7 +24,7 @@ class Node extends Entity
        *
        * @return string
        */
-    public function getTitle()
+    public function getTitle(): string
     {
         return $this->get('title');
     }

@@ -9,7 +9,7 @@ class User extends Entity
      *
      * @return string|null
      */
-    public function getUsername()
+    public function getUsername(): string
     {
         return $this->data['name'];
     }

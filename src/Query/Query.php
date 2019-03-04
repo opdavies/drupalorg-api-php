@@ -54,41 +54,24 @@ abstract class Query implements QueryInterface
         $this->uri = $this->setUri();
     }
 
-    /**
-     * @return array
-     */
-    public function getOptions()
+    public function getOptions(): array
     {
         return $this->options;
     }
 
-    /**
-     * @return string
-     */
-    public function getUri()
+    public function getUri(): string
     {
         return $this->uri;
     }
 
-    /**
-     * @param array $options
-     *
-     * @return $this
-     */
-    public function setOptions(array $options)
+    public function setOptions(array $options): QueryInterface
     {
         $this->options = $options;
 
         return $this;
     }
 
-    /**
-     * Execute the query.
-     *
-     * @throws Exception
-     * @return $this
-     */
-    public function execute()
+    public function execute(): self
     {
         $this->response = $this->query->get($this->uri, $this->options);
 
@@ -106,26 +89,17 @@ abstract class Query implements QueryInterface
         return $this;
     }
 
-    /**
-     * @return Client
-     */
-    public function getQuery()
+    public function getQuery(): ClientInterface
     {
         return $this->query;
     }
 
-    /**
-     * @return ResponseInterface
-     */
-    public function getResponse()
+    public function getResponse(): ResponseInterface
     {
         return $this->response;
     }
 
-    /**
-     * @return Collection
-     */
-    public function getContents()
+    public function getContents(): Collection
     {
         return collect($this->contents);
     }

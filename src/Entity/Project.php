@@ -16,20 +16,16 @@ class Project extends Node
 
     /**
      * Retrieve the number of downloads.
-     *
-     * @return int
      */
-    public function getDownloads()
+    public function getDownloads(): int
     {
         return (int) $this->get(self::FIELD_DOWNLOADS);
     }
 
     /**
      * Return the number of stars.
-     *
-     * @return int
      */
-    public function getStars()
+    public function getStars(): int
     {
         return collect($this->get(self::FIELD_STARS))
             ->count();

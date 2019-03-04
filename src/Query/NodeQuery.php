@@ -7,7 +7,7 @@ class NodeQuery extends Query
     /**
      * {@inheritdoc}
      */
-    public function setUri()
+    public function setUri(): string
     {
         return 'node.json';
     }
