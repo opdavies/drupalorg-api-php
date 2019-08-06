@@ -10,7 +10,7 @@
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^2.10",
         "phpunit/phpunit": "^5.7",
-        "symfony/var-dumper": "^3.4"
+        "symfony/var-dumper": "^4.3"
     },
     "autoload": {
         "psr-4": {
